@@ -3,17 +3,18 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Survive School', { preload: p
 
 function preload() {
 
-    game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('homework', 'assets/homework.png');
-   // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
-	game.load.image('test','assets/test.png');
-	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
-	 game.load.image('school', 'assets/school.png');
-	 game.load.image('menu', 'assets/blackbox.png', 360, 200);
+    game.load.image('background', 'assets/back2.png');
+    game.load.image('atm', 'assets/atm.png');
+	game.load.image('bank','assets/bank.png');
+	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 6);
+	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120, 6);
+	 game.load.spritesheet('business', 'assets/business.png', 30, 69, 8);
+	 game.load.spritesheet('businessmoney', 'assets/businessmoney.png', 30, 69, 8);
+	
+	// game.load.image('menu', 'assets/blackbox.png', 360, 200);
 	 
 	//add sound
-	game.load.audio('music', 'assets/audio/How_It_Began.mp3'); 
+	//game.load.audio('music', 'assets/audio/How_It_Began.mp3'); 
 
 }
 
@@ -40,20 +41,20 @@ var timeLeft = 32;
 var timerText = 0;
 
 function create() {
-	superKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+	//superKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
 
     //add sound
-	game.input.touch.preventDefault = false;
-	sound = game.add.audio('music');
-	sound.play();
-	game.input.onDown.add(restartMusic, this);
-		
+	//game.input.touch.preventDefault = false;
+	//sound = game.add.audio('music');
+	//sound.play();
+	//game.input.onDown.add(restartMusic, this);
+	
 	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
-    game.add.sprite(0, 0, 'sky');
-	school = game.add.tileSprite(0, 0, 800, 600, 'school');
+    game.add.sprite(0, 0, 'back2');
+	//school = game.add.tileSprite(0, 0, 800, 600, 'tilespritename');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -62,46 +63,57 @@ function create() {
     platforms.enableBody = true;
 
     // Here we create the ground.
-    var ground = platforms.create(0, game.world.height - 64, 'ground');
+    var ground = platforms.create(0, game.world.height - 64);
 
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    //  Scale it to fit the width of the game  
     ground.scale.setTo(2, 2);
 
     //  This stops it from falling away when you jump on it
     ground.body.immovable = true;
 
     //  Now let's create two ledges
-    var ledge = platforms.create(400, 400, 'ground');
-    ledge.body.immovable = true;
+    //var ledge = platforms.create(400, 400, 'ground');
+    //ledge.body.immovable = true;
 
-    ledge = platforms.create(-150, 250, 'ground');
-    ledge.body.immovable = true;
+    //ledge = platforms.create(-150, 250, 'ground');
+    //ledge.body.immovable = true;
 
     // The player and its settings
-    player = game.add.sprite(32, game.world.height - 150, 'betty');
+    player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
+	player2 = game.add.sprite(32, game.world.height - 150, 'thief');
 
-    //  We need to enable physics on the player
-    game.physics.arcade.enable(player);
+    //  We need to enable physics on the players
+    game.physics.arcade.enable(player1);
+	game.physics.arcade.enable(player2);
 
-    //  Player physics properties. Give the little guy a slight bounce.
-    player.body.bounce.y = 0.2;
-    player.body.gravity.y = 400;
-    player.body.collideWorldBounds = true;
+    //  Player1 physics properties. Give the little guy a slight bounce.
+    player1.body.bounce.y = 0.2;
+    player1.body.gravity.y = 400;
+    player1.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-	player.animations.add('left', [1, 5, 9, 13], 16, true);
-	player.animations.add('right', [3, 7, 11, 15], 16, true);
+	player1.animations.add('left', [0, 1, 2, 8], 16, true);
+	player1.animations.add('right', [4, 5, 6, 8], 16, true);
+	
+	//  Player2 physics properties. Give the little guy a slight bounce.
+    player2.body.bounce.y = 0.2;
+    player2.body.gravity.y = 400;
+    player2.body.collideWorldBounds = true;
 
-    //CHANGE : moved hw
+    //  Our two animations, walking left and right.
+	player2.animations.add('left', [0, 1, 2], 6, true);
+	player2.animations.add('right', [3, 4, 5], 6, true);
+
+
 
     //  The score
-    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    //scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 	
 	//The Time left
-	timerText = game.add.text(670, 13, 'Time: 32', { fontSize: '32px', fill: '#000' });
-	timer = game.time.create(false);
-	timer.loop(1000, updateTimer, this);
-	timer.start();
+	//timerText = game.add.text(670, 13, 'Time: 32', { fontSize: '32px', fill: '#000' });
+	//timer = game.time.create(false);
+	//timer.loop(1000, updateTimer, this);
+	//timer.start();
 	
 
     //  Our controls.
@@ -114,23 +126,23 @@ function create() {
 
     //  Once the event has been called 2 times it will never be called again.
 
-    game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
+    //game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
 	
 	//  AT 15 SECOND MARK
 	//  Here we'll create a basic timed event. This is a one-off event, it won't repeat or loop:
     //  The first parameter is how long to wait before the event fires. In this case 15 seconds 
     //  The next parameter is the function to call ('halfTime') and finally the context under which that will happen.
 
-    game.time.events.add(Phaser.Timer.SECOND * 15, halfTime, this);
+    //game.time.events.add(Phaser.Timer.SECOND * 15, halfTime, this);
 	
 	//  AT 30 SECONDS
-	game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
+	//game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
 	
 	//  AT 33 SECONDS
-	game.time.events.add(Phaser.Timer.SECOND * 33, endGame, this); // Testing purposes only
+	//game.time.events.add(Phaser.Timer.SECOND * 33, endGame, this); // Testing purposes only
 }
 
-function returnGrade(score){
+/* function returnGrade(score){
 	if (score >= 90){
 		return "A";
 	} else if (score >= 80){
@@ -142,9 +154,9 @@ function returnGrade(score){
 	} else {
 		return "F";
 	}
-}
+} */
 
-function restartMusic() {
+/* function restartMusic() {
 	sound.restart();
 }
 
@@ -153,23 +165,24 @@ function updateTimer() {
     timeLeft--;
 	timerText.setText('Time: ' + timeLeft);
 
-}
+} */
 
 function update() {
 
     //  Collide the player and the homework with the platforms
-    game.physics.arcade.collide(player, platforms);
-    if (game.physics.arcade.collide(homework, platforms)){
+    game.physics.arcade.collide(player1, platforms);
+	game.physics.arcade.collide(player2, platforms);
+   /*  if (game.physics.arcade.collide(homework, platforms)){
 		homework.points = 10;
-	}
+	} */
 
     //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
-    game.physics.arcade.overlap(player, homework, collectHomework, null, this);
+    //game.physics.arcade.overlap(player, homework, collectHomework, null, this);
 
 	// CHANGE: tests
-	game.physics.arcade.overlap(player, aTest, collectTest, null, this);
+	//game.physics.arcade.overlap(player, aTest, collectTest, null, this);
 
-	if (superKey.isDown){
+	/* if (superKey.isDown){
 		superMode = true;
 	}
 	
@@ -177,84 +190,85 @@ function update() {
 		updateSuperPlayer();
 	} else {
 		updatePlayer();
-	}
+	} */
     
 }
 
-function updateSuperPlayer() {
-	player.body.velocity.x = 0;
+/* function updateSuperPlayer() {
+	player1.body.velocity.x = 0;
+	player2.body.velocity.x = 0;
 	if (cursors.left.isDown)
     {
         //  Move to the left
-        player.body.velocity.x = -250;
+        player1.body.velocity.x = -250;
 
-        player.animations.play('left');
-		school.tilePosition.x+= 5;
+        player1.animations.play('left');
+		//school.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player.body.velocity.x = 250;
+        player1.body.velocity.x = 250;
 
-        player.animations.play('right');
-		school.tilePosition.x-=5;
+        player1.animations.play('right');
+		//school.tilePosition.x-=5;
     }
     else
     {
         //  Stand still
-        player.animations.stop();
+        player1.animations.stop();
 
-        player.frame = 4;
+        player1.frame = 4;
     }
     
     //  Allow the player to jump
     if (cursors.up.isDown)
     {
-        player.body.velocity.y = -300;
+        player1.body.velocity.y = -300;
     }
 	else if (cursors.down.isDown)
 	{
-		player.body.velocity.y += 300;
+		player1.body.velocity.y += 300;
 	}
-}
+} */
 
 function updatePlayer() {
 	//  Reset the players velocity (movement)
-    player.body.velocity.x = 0;
+    player1.body.velocity.x = 0;
 
     if (cursors.left.isDown)
     {
         //  Move to the left
-        player.body.velocity.x = -150;
+        player1.body.velocity.x = -150;
 
-        player.animations.play('left');
-		school.tilePosition.x+= 5;
+        player1.animations.play('left');
+		//school.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player.body.velocity.x = 150;
+        player1.body.velocity.x = 150;
 
-        player.animations.play('right');
-		school.tilePosition.x-=5;
+        player1.animations.play('right');
+		//school.tilePosition.x-=5;
     }
     else
     {
         //  Stand still
-        player.animations.stop();
+        player1.animations.stop();
 
-        player.frame = 4;
+        player1.frame = 4;
     }
     
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player.body.touching.down)
     {
-        player.body.velocity.y = -350;
+        player1.body.velocity.y = -350;
     }
 }
 
 
-function createHomework() {
+/* function createHomework() {
 	try {
 		homework.kill();
 	} catch (err){
@@ -271,24 +285,24 @@ function createHomework() {
 	
 	homework.body.gravity.y = 300;
 
-}
+} */
 
-function createTest() {
+/* function createTest() {
 	try {
 		aTest.kill();
 		homework.kill();
 	} catch (err){
 		
 	}
-
-	var testFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
-	// The player and its settings
+ */
+	/* var testFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
+	The player and its settings
     aTest = game.add.sprite(testFall, 0, 'test');
 
-    //  We need to enable physics on the test
+     We need to enable physics on the test
     game.physics.arcade.enable(aTest);
 	
-	aTest.body.gravity.y = 300;
+	aTest.body.gravity.y = 300; */
 	
 	/*
 	//  Finally some tests to collect
@@ -305,11 +319,11 @@ function createTest() {
 
 }
 
-function halfTime(homework){
+/* function halfTime(homework){
 	
 	createTest();
 	game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
-}
+} */
 
 function render() {
 
@@ -322,7 +336,7 @@ function render() {
 
 }
 
-function collectHomework (player, homework) {
+/* function collectHomework (player, homework) {
     
     // Removes the homework from the screen
     homework.kill();
@@ -331,9 +345,9 @@ function collectHomework (player, homework) {
     score += homework.points;
     scoreText.text = 'Score: ' + score;
 
-}
+} */
 
-function collectTest (player, aTest) {
+/* function collectTest (player, aTest) {
     
     // Removes the homework from the screen
     aTest.kill();
@@ -342,9 +356,9 @@ function collectTest (player, aTest) {
     score += 20;
     scoreText.text = 'Score: ' + score;
 
-}
+} */
 
-function endGame() {
+/* function endGame() {
 	// When the pause button is pressed, we pause the game
     game.paused = true;
 	var w = game.world.width;
@@ -376,4 +390,4 @@ function endGame() {
 	function restart(event){
 		location.reload();
 	}
-}
+} */
