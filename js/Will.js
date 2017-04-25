@@ -21,7 +21,8 @@ function preload() {
 var superMode = false;
 var superKey;
 
-var player;
+var player1;
+var player2;
 var platforms;
 var cursors;
 
@@ -53,7 +54,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
-    game.add.sprite(0, 0, 'back2');
+    game.add.sprite(0, 0, 'background');
 	//school = game.add.tileSprite(0, 0, 800, 600, 'tilespritename');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
