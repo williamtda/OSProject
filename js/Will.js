@@ -6,10 +6,10 @@ function preload() {
     game.load.image('background', 'assets/back2.png');
     game.load.image('atm', 'assets/atm.png');
 	game.load.image('bank','assets/bank.png');
-	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 6);
-	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120, 6);
-	 game.load.spritesheet('business', 'assets/business.png', 30, 69, 8);
-	 game.load.spritesheet('businessmoney', 'assets/businessmoney.png', 30, 69, 8);
+	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120);
+	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120);
+	 game.load.spritesheet('business', 'assets/business.png', 30, 69);
+	 game.load.spritesheet('businessmoney', 'assets/businessmoney.png', 30, 69);
 	
 	// game.load.image('menu', 'assets/blackbox.png', 360, 200);
 	 
@@ -82,6 +82,8 @@ function create() {
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	player2 = game.add.sprite(32, game.world.height - 150, 'thief');
+	player1.frame = 1;
+	player2.frame = 1;
 
     //  We need to enable physics on the players
     game.physics.arcade.enable(player1);
@@ -93,8 +95,8 @@ function create() {
     player1.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-	player1.animations.add('left', [0, 1, 2, 8], 16, true);
-	player1.animations.add('right', [4, 5, 6, 8], 16, true);
+	player1.animations.add('left', [0, 1, 2, 3], 8, true);
+	player1.animations.add('right', [4, 5, 6, 7], 8, true);
 	
 	//  Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
