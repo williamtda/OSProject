@@ -75,7 +75,7 @@ function create() {
     var ledge = platforms.create(600, 400, 'ground');
     ledge.body.immovable = true;
 
-    ledge = platforms.create(-150, 400, 'ground');
+    ledge = platforms.create(-150, 250, 'ground');
     ledge.body.immovable = true;
 	
 	var atm = platforms.create(game.world.width - 180, 250, 'atm');
