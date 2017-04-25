@@ -1,5 +1,5 @@
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Survive School', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Multithreads', { preload: preload, create: create, update: update });
 
 function preload() {
 
@@ -326,7 +326,8 @@ function updatePlayer() {
 	game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
 } */
 
-function render() {
+/* function render() 
+{
 
     //sound-related
 	game.debug.soundInfo(sound, 20, 32);
@@ -335,7 +336,7 @@ function render() {
 	game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
     game.debug.text("Next tick: " + game.time.events.next.toFixed(0), 32, 64);
 
-}
+} */
 
 /* function collectHomework (player, homework) {
     
