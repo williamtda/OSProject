@@ -52,9 +52,9 @@ function create() {
 	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    //  A simple background for our game
-    game.add.sprite(0, 0, 'background');
-	//school = game.add.tileSprite(0, 0, 800, 600, 'tilespritename');
+    //  A simple sbackground for our game
+   // game.add.sprite(0, 0, 'background');
+	back2 = game.add.tileSprite(0, 0, 800, 600, 'background');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -199,7 +199,7 @@ function update() {
         player1.body.velocity.x = -150;
 
         player1.animations.play('left');
-		//school.tilePosition.x+= 5;
+		back2.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
     {
@@ -207,7 +207,7 @@ function update() {
         player1.body.velocity.x = 150;
 
        player1.animations.play('right');
-		//school.tilePosition.x-=5;
+		back2.tilePosition.x-=5;
     }
     else
     {
