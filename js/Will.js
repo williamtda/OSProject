@@ -78,7 +78,7 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = platforms.create(game.world.width - 200, 380, 'atm');
+	var atm = platforms.create(game.world.width - 200, 300, 'atm');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     atm.scale.setTo(2, 2);
