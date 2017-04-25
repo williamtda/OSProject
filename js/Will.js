@@ -104,8 +104,8 @@ function create() {
     player2.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-	player2.animations.add('left', [0, 1, 2], 6, true);
-	player2.animations.add('right', [3, 4, 5], 6, true);
+	player2.animations.add('left2', [0, 1, 2], 6, true);
+	player2.animations.add('right2', [3, 4, 5], 6, true);
 
 
 
