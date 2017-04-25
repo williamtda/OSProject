@@ -318,7 +318,7 @@ function updatePlayer() {
 	aTest.body.gravity.y = 100; // TODO: make it fall slower
 	*/
 
-}
+
 
 /* function halfTime(homework){
 	
