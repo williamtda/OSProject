@@ -82,7 +82,7 @@ function create() {
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	//player2 = game.add.sprite(32, game.world.height - 150, 'thief');
-	player1.frame = 1;
+	//player1.frame = 1;
 	//player2.frame = 1;
 
     //  We need to enable physics on the players
@@ -94,9 +94,9 @@ function create() {
     player1.body.gravity.y = 400;
     player1.body.collideWorldBounds = true;
 
-    //  Our two animations, walking left and right.
+  /*   //  Our two animations, walking left and right.
 	player1.animations.add('left', [0, 1, 2, 3], 8, true);
-	player1.animations.add('right', [4, 5, 6, 7], 8, true);
+	player1.animations.add('right', [4, 5, 6, 7], 8, true); */
 	
 	/* //  Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
@@ -244,7 +244,7 @@ function updatePlayer() {
         //  Move to the left
         player1.body.velocity.x = -150;
 
-        player1.animations.play('left');
+        //player1.animations.play('left');
 		//school.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
@@ -252,15 +252,15 @@ function updatePlayer() {
         //  Move to the right
         player1.body.velocity.x = 150;
 
-        player1.animations.play('right');
+       // player1.animations.play('right');
 		//school.tilePosition.x-=5;
     }
     else
     {
         //  Stand still
-        player1.animations.stop();
+       // player1.animations.stop();
 
-        player1.frame = 4;
+        player1.frame = 2;
     }
     
     //  Allow the player to jump if they are touching the ground.
