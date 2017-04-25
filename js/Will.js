@@ -7,7 +7,7 @@ function preload() {
     game.load.image('atm', 'assets/atm.png');
 	game.load.image('bank','assets/bank.png');
 	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120);
-	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120, 5);
+	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120);
 	 game.load.spritesheet('business', 'assets/business.png', 30, 69);
 	 game.load.spritesheet('businessmoney', 'assets/businessmoney.png', 30, 69, 7);
 	 game.load.image('ground', 'assets/platform.png');
