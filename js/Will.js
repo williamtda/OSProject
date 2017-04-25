@@ -94,8 +94,8 @@ function create() {
     player1.body.collideWorldBounds = true;
 
      //  Our two animations, walking left and right.
-	player1.animations.add('left', [3, 4, 5], 5, true);
-	player1.animations.add('right', [0, 1, 2], 5, true); 
+	//player1.animations.add('left', [3, 4, 5], 5, true);
+	//player1.animations.add('right', [0, 1, 2], 5, true); 
 	
 	/* //  Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
@@ -198,7 +198,7 @@ function update() {
         //  Move to the left
         player1.body.velocity.x = -150;
 
-        player1.animations.play('left');
+       // player1.animations.play('left');
 		//school.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
@@ -206,7 +206,7 @@ function update() {
         //  Move to the right
         player1.body.velocity.x = 150;
 
-        player1.animations.play('right');
+       // player1.animations.play('right');
 		//school.tilePosition.x-=5;
     }
     else
