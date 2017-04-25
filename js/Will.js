@@ -183,7 +183,7 @@ function update() {
 
 	// CHANGE: tests
 	//game.physics.arcade.overlap(player, aTest, collectTest, null, this);
-      player.body.velocity.x = 0;
+      player1.body.velocity.x = 0;
 	/* if (superKey.isDown){
 		superMode = true;
 	}
