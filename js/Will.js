@@ -198,7 +198,7 @@ function update() {
         //  Move to the left
         player1.body.velocity.x = -150;
 
-        //player1.animations.play('left');
+        player1.animations.play('left');
 		//school.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
@@ -206,13 +206,13 @@ function update() {
         //  Move to the right
         player1.body.velocity.x = 150;
 
-       // player1.animations.play('right');
+        player1.animations.play('right');
 		//school.tilePosition.x-=5;
     }
     else
     {
         //  Stand still
-       // player1.animations.stop();
+        player1.animations.stop();
 
         player1.frame = 2;
     }
