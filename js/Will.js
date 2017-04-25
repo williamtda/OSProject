@@ -9,8 +9,8 @@ function preload() {
 	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120);
 	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120);
 	 game.load.spritesheet('business', 'assets/business.png', 30, 69);
-	 game.load.spritesheet('businessmoney', 'assets/businessmoney.png', 30, 69);
-	
+	 game.load.spritesheet('businessmoney', 'assets/businessmoney.png', 30, 69, 7);
+	 game.load.image('ground', 'assets/platform.png');
 	// game.load.image('menu', 'assets/blackbox.png', 360, 200);
 	 
 	//add sound
@@ -18,8 +18,7 @@ function preload() {
 
 }
 
-var superMode = false;
-var superKey;
+
 
 var player1;
 //var player2;
@@ -64,7 +63,7 @@ function create() {
     platforms.enableBody = true;
 
     // Here we create the ground.
-    var ground = platforms.create(0, game.world.height - 64);
+    var ground = platforms.create(0, game.world.height - 64, 'ground');
 
     //  Scale it to fit the width of the game  
     ground.scale.setTo(2, 2);
@@ -94,9 +93,9 @@ function create() {
     player1.body.gravity.y = 400;
     player1.body.collideWorldBounds = true;
 
-  /*   //  Our two animations, walking left and right.
-	player1.animations.add('left', [0, 1, 2, 3], 8, true);
-	player1.animations.add('right', [4, 5, 6, 7], 8, true); */
+     //  Our two animations, walking left and right.
+	player1.animations.add('left', [0, 1], 7, true);
+	player1.animations.add('right', [4, 5], 7, true); 
 	
 	/* //  Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
@@ -184,7 +183,7 @@ function update() {
 
 	// CHANGE: tests
 	//game.physics.arcade.overlap(player, aTest, collectTest, null, this);
-
+      player.body.velocity.x = 0;
 	/* if (superKey.isDown){
 		superMode = true;
 	}
@@ -194,6 +193,35 @@ function update() {
 	} else {
 		updatePlayer();
 	} */
+	 if (cursors.left.isDown)
+    {
+        //  Move to the left
+        player1.body.velocity.x = -150;
+
+        //player1.animations.play('left');
+		//school.tilePosition.x+= 5;
+    }
+    else if (cursors.right.isDown)
+    {
+        //  Move to the right
+        player1.body.velocity.x = 150;
+
+       // player1.animations.play('right');
+		//school.tilePosition.x-=5;
+    }
+    else
+    {
+        //  Stand still
+       // player1.animations.stop();
+
+        player1.frame = 2;
+    }
+    
+    //  Allow the player to jump if they are touching the ground.
+    if (cursors.up.isDown && player1.body.touching.down)
+    {
+        player1.body.velocity.y = -350;
+    }
     
 }
 
@@ -235,40 +263,12 @@ function update() {
 	}
 } */
 
-function updatePlayer() {
+/* function updatePlayer() {
 	//  Reset the players velocity (movement)
     player1.body.velocity.x = 0;
 
-    if (cursors.left.isDown)
-    {
-        //  Move to the left
-        player1.body.velocity.x = -150;
-
-        //player1.animations.play('left');
-		//school.tilePosition.x+= 5;
-    }
-    else if (cursors.right.isDown)
-    {
-        //  Move to the right
-        player1.body.velocity.x = 150;
-
-       // player1.animations.play('right');
-		//school.tilePosition.x-=5;
-    }
-    else
-    {
-        //  Stand still
-       // player1.animations.stop();
-
-        player1.frame = 2;
-    }
-    
-    //  Allow the player to jump if they are touching the ground.
-    if (cursors.up.isDown && player1.body.touching.down)
-    {
-        player1.body.velocity.y = -350;
-    }
-}
+   
+} */
 
 
 /* function createHomework() {
