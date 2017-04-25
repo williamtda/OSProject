@@ -22,7 +22,7 @@ var superMode = false;
 var superKey;
 
 var player1;
-var player2;
+//var player2;
 var platforms;
 var cursors;
 
@@ -81,13 +81,13 @@ function create() {
 
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
-	player2 = game.add.sprite(32, game.world.height - 150, 'thief');
+	//player2 = game.add.sprite(32, game.world.height - 150, 'thief');
 	player1.frame = 1;
-	player2.frame = 1;
+	//player2.frame = 1;
 
     //  We need to enable physics on the players
     game.physics.arcade.enable(player1);
-	game.physics.arcade.enable(player2);
+	//game.physics.arcade.enable(player2);
 
     //  Player1 physics properties. Give the little guy a slight bounce.
     player1.body.bounce.y = 0.2;
@@ -98,7 +98,7 @@ function create() {
 	player1.animations.add('left', [0, 1, 2, 3], 8, true);
 	player1.animations.add('right', [4, 5, 6, 7], 8, true);
 	
-	//  Player2 physics properties. Give the little guy a slight bounce.
+	/* //  Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
     player2.body.gravity.y = 400;
     player2.body.collideWorldBounds = true;
@@ -106,7 +106,7 @@ function create() {
     //  Our two animations, walking left and right.
 	player2.animations.add('left2', [0, 1, 2], 6, true);
 	player2.animations.add('right2', [3, 4, 5], 6, true);
-
+ */
 
 
     //  The score
@@ -174,7 +174,7 @@ function update() {
 
     //  Collide the player and the homework with the platforms
     game.physics.arcade.collide(player1, platforms);
-	game.physics.arcade.collide(player2, platforms);
+	//game.physics.arcade.collide(player2, platforms);
    /*  if (game.physics.arcade.collide(homework, platforms)){
 		homework.points = 10;
 	} */
