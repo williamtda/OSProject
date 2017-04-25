@@ -94,8 +94,8 @@ function create() {
     player1.body.collideWorldBounds = true;
 
      //  Our two animations, walking left and right.
-	player1.animations.add('left', [0, 1], 7, true);
-	player1.animations.add('right', [4, 5], 7, true); 
+	player1.animations.add('left', [4, 5, 6, 7], 7, true);
+	player1.animations.add('right', [0, 1, 2, 3], 7, true); 
 	
 	/* //  Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
