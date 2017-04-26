@@ -21,10 +21,13 @@ function preload() {
 
 
 var player1;
-//var player2;
+var player2;
 var platforms;
 var cursors;
-
+var Akey;
+var Wkey;
+var Skey;
+var Dkey;
 var homework;
 var score = 0;
 var scoreText;
@@ -91,13 +94,13 @@ function create() {
 
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'business');
-	//player2 = game.add.sprite(32, game.world.height - 150, 'thief');
+	player2 = game.add.sprite(100, game.world.height - 150, 'thief');
 	//player1.frame = 1;
 	//player2.frame = 1;
 
     //  We need to enable physics on the players
     game.physics.arcade.enable(player1);
-	//game.physics.arcade.enable(player2);
+	game.physics.arcade.enable(player2);
 
     //  Player1 physics properties. Give the little guy a slight bounce.
     player1.body.bounce.y = 0.2;
@@ -108,15 +111,15 @@ function create() {
 	player1.animations.add('left', [4, 5, 6, 7], 7, true);
 	player1.animations.add('right', [0, 1, 2, 3], 7, true); 
 	
-	/* //  Player2 physics properties. Give the little guy a slight bounce.
+	 // Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
     player2.body.gravity.y = 400;
     player2.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-	player2.animations.add('left2', [0, 1, 2], 6, true);
-	player2.animations.add('right2', [3, 4, 5], 6, true);
- */
+	//player2.animations.add('left2', [0, 1, 2], 6, true);
+	//player2.animations.add('right2', [3, 4, 5], 6, true);
+ 
 
 
     //  The score
@@ -131,7 +134,10 @@ function create() {
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
-	
+	Wkey = game.input.keyboard.addKey(Phaser.Keyboard.W);
+	Akey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+	Skey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+	Dkey = game.input.keyboard.addKey(Phaser.Keyboard.D);
 	
 	//  The first parameter is how long to wait before the event fires. In this case 5 seconds (you could pass in 2000 as the value as well.)
     //  The second parameter is how many times the event will run in total. Here we'll run it 2 times.
@@ -184,7 +190,7 @@ function update() {
 
     //  Collide the player and the homework with the platforms
     game.physics.arcade.collide(player1, platforms);
-	//game.physics.arcade.collide(player2, platforms);
+	game.physics.arcade.collide(player2, platforms);
    /*  if (game.physics.arcade.collide(homework, platforms)){
 		homework.points = 10;
 	} */
@@ -195,6 +201,7 @@ function update() {
 	// CHANGE: tests
 	//game.physics.arcade.overlap(player, aTest, collectTest, null, this);
       player1.body.velocity.x = 0;
+	   player2.body.velocity.x = 0;
 	/* if (superKey.isDown){
 		superMode = true;
 	}
@@ -210,7 +217,7 @@ function update() {
         player1.body.velocity.x = -150;
 
         player1.animations.play('left');
-		back2.tilePosition.x+= 5;
+		//back2.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
     {
@@ -218,7 +225,7 @@ function update() {
         player1.body.velocity.x = 150;
 
        player1.animations.play('right');
-		back2.tilePosition.x-=5;
+		//back2.tilePosition.x-=5;
     }
     else
     {
@@ -233,7 +240,36 @@ function update() {
     {
         player1.body.velocity.y = -350;
     }
+	
+     if (Akey.isDown)
+    {
+        //  Move to the left
+        player2.body.velocity.x = -150;
+
+        
+		//back2.tilePosition.x+= 5;
+    }
+    else if (Dkey.isDown)
+    {
+        //  Move to the right
+        player2.body.velocity.x = 150;
+
+       //player1.animations.play('right');
+		//back2.tilePosition.x-=5;
+    }
+    else
+    {
+        //  Stand still
+        //player1.animations.stop();
+
+        player2.frame = 2;
+    }
     
+    //  Allow the player to jump if they are touching the ground.
+    if (Wkey.isDown && player2.body.touching.down)
+    {
+        player2.body.velocity.y = -350;
+    }
 }
 
 /* function updateSuperPlayer() {
