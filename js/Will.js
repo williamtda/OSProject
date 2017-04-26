@@ -23,6 +23,7 @@ function preload() {
 var player1;
 var player2;
 var platforms;
+var atms;
 var cursors;
 var Akey;
 var Wkey;
@@ -61,9 +62,11 @@ function create() {
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
+	atms = game.add.group();
 
     //  We will enable physics for any object that is created in this group
     platforms.enableBody = true;
+	atms.enableBody = true;
 
     // Here we create the ground.
     var ground = platforms.create(0, game.world.height - 64, 'ground');
@@ -81,8 +84,8 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = platforms.create(game.world.width - 180, 250, 'atm');
-	var bank = platforms.create(0, 250, 'atm');
+	var atm = atms.create(game.world.width - 180, 250, 'atm');
+	var bank = atms.create(0, 250, 'atm');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     atm.scale.setTo(2, 2);
