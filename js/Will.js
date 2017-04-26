@@ -30,8 +30,8 @@ var Wkey;
 var Skey;
 var Dkey;
 var homework;
-var score = 0;
-var scoreText;
+var balance = 0;
+var balanceText;
 
 //CHANGE
 var aTest;
@@ -86,14 +86,17 @@ function create() {
 	
 	var atm = atms.create(game.world.width - 180, 250, 'atm');
 	var bank = atms.create(0, 250, 'atm');
+	var realBank = atms.create(400, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     atm.scale.setTo(2, 2);
 	bank.scale.setTo(2, 2);
+	realBank.scale.setTo(2, 2);
 
     //  This stops it from falling away when you jump on it
     atm.body.immovable = true;
 	bank.body.immovable = true;
+	realBank.body.immovable = true;
 
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'business');
@@ -217,7 +220,7 @@ function update() {
 	 if (cursors.left.isDown)
     {
         //  Move to the left
-        player1.body.velocity.x = -200;
+        player1.body.velocity.x = -300;
 
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
@@ -225,7 +228,7 @@ function update() {
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player1.body.velocity.x = 200;
+        player1.body.velocity.x = 300;
 
        player1.animations.play('right');
 		//back2.tilePosition.x-=5;
@@ -247,7 +250,7 @@ function update() {
      if (Akey.isDown)
     {
         //  Move to the left
-        player2.body.velocity.x = -200;
+        player2.body.velocity.x = -300;
 		player2.animations.play('left');
         
 		//back2.tilePosition.x+= 5;
@@ -255,7 +258,7 @@ function update() {
     else if (Dkey.isDown)
     {
         //  Move to the right
-        player2.body.velocity.x = 200;
+        player2.body.velocity.x = 300;
 
        player2.animations.play('right');
 		//back2.tilePosition.x-=5;
