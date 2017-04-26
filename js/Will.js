@@ -214,7 +214,7 @@ function update() {
 	 if (cursors.left.isDown)
     {
         //  Move to the left
-        player1.body.velocity.x = -150;
+        player1.body.velocity.x = -200;
 
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
@@ -222,7 +222,7 @@ function update() {
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player1.body.velocity.x = 150;
+        player1.body.velocity.x = 200;
 
        player1.animations.play('right');
 		//back2.tilePosition.x-=5;
@@ -238,13 +238,13 @@ function update() {
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player1.body.touching.down)
     {
-        player1.body.velocity.y = -350;
+        player1.body.velocity.y = -400;
     }
 	
      if (Akey.isDown)
     {
         //  Move to the left
-        player2.body.velocity.x = -150;
+        player2.body.velocity.x = -200;
 		player2.animations.play('left');
         
 		//back2.tilePosition.x+= 5;
@@ -252,7 +252,7 @@ function update() {
     else if (Dkey.isDown)
     {
         //  Move to the right
-        player2.body.velocity.x = 150;
+        player2.body.velocity.x = 200;
 
        player2.animations.play('right');
 		//back2.tilePosition.x-=5;
@@ -268,7 +268,7 @@ function update() {
     //  Allow the player to jump if they are touching the ground.
     if (Wkey.isDown && player2.body.touching.down)
     {
-        player2.body.velocity.y = -350;
+        player2.body.velocity.y = -400;
     }
 }
 
