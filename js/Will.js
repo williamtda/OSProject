@@ -117,8 +117,8 @@ function create() {
     player2.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-	//player2.animations.add('left2', [0, 1, 2], 6, true);
-	//player2.animations.add('right2', [3, 4, 5], 6, true);
+	player2.animations.add('left', [4, 5, 6, 7], 7, true);
+	player2.animations.add('right', [0, 1, 2, 3], 7, true); 
  
 
 
@@ -245,7 +245,7 @@ function update() {
     {
         //  Move to the left
         player2.body.velocity.x = -150;
-
+		player2.animations.play('left');
         
 		//back2.tilePosition.x+= 5;
     }
@@ -254,7 +254,7 @@ function update() {
         //  Move to the right
         player2.body.velocity.x = 150;
 
-       //player1.animations.play('right');
+       player2.animations.play('right');
 		//back2.tilePosition.x-=5;
     }
     else
