@@ -94,7 +94,7 @@ function create() {
 
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'business');
-	player2 = game.add.sprite(100, game.world.height - 150, 'thief');
+	player2 = game.add.sprite(100, game.world.height - 150, 'businessmoney');
 	//player1.frame = 1;
 	//player2.frame = 1;
 
