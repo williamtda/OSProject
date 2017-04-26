@@ -86,7 +86,7 @@ function create() {
 	
 	var atm = atms.create(game.world.width - 180, 250, 'atm');
 	var bank = atms.create(0, 250, 'atm');
-	var realBank = atms.create(400, 0, 'bank');
+	var realBank = atms.create(350, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     atm.scale.setTo(2, 2);
