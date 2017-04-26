@@ -144,7 +144,7 @@ function updateTimer() {
     timeLeft--;
 	timerText.setText('Time: ' + timeLeft);
 
-} */
+} 
 
 function update() {
 
