@@ -91,7 +91,7 @@ function create() {
 	realBank.body.immovable = true;
 
     // The player and its settings
-    player1 = game.add.sprite(32, game.world.height - 150, 'business');
+    player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
 	//player1.frame = 1;
 	//player2.frame = 1;
@@ -173,13 +173,23 @@ function update() {
 
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
+		player1.frame = 4;
     }
-	 if (cursors.down.isDown && cursors.right.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
+	 if (cursors.down.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
 	 {
-		 player1.animations.play('shootRight');
+	 if (player1.frame == 0)
+	 {
+		player1.animations.play('shootRight');
 		p1ShootRight();
 		prevShot = this.game.time.totalElapsedSeconds();
     }
+	if (player1.frame == 4)
+	 {
+		player1.animations.play('shootLeft');
+		p1ShootLeft();
+		prevShot = this.game.time.totalElapsedSeconds();
+    }
+	 }
     else if (cursors.right.isDown)
     {
         //  Move to the right
@@ -187,6 +197,7 @@ function update() {
 
        player1.animations.play('right');
 		//back2.tilePosition.x-=5;
+		player1.frame = 0;
     }
     else
     {
@@ -195,7 +206,21 @@ function update() {
 
         player1.frame = 2;
     }
-    
+    if (Skey.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
+	 {
+	 if (player2.frame = 0)
+	 {
+		player2.animations.play('shootRight');
+		p2ShootRight();
+		prevShot = this.game.time.totalElapsedSeconds();
+    }
+	if (player2.frame = 4)
+	 {
+		player2.animations.play('shootLeft');
+		p2ShootLeft();
+		prevShot = this.game.time.totalElapsedSeconds();
+    }
+	 }
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player1.body.touching.down)
     {
@@ -209,6 +234,7 @@ function update() {
 		player2.animations.play('left');
         
 		//back2.tilePosition.x+= 5;
+		player2.frame = 4;
     }
     else if (Dkey.isDown)
     {
@@ -217,14 +243,16 @@ function update() {
 
        player2.animations.play('right');
 		//back2.tilePosition.x-=5;
+		player2.frame = 0;
     }
     else
     {
         //  Stand still
         //player1.animations.stop();
 
-        player2.frame = 2;
+        //player2.frame = 2;
     }
+	
     
     //  Allow the player to jump if they are touching the ground.
     if (Wkey.isDown && player2.body.touching.down)
