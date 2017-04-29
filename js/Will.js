@@ -177,7 +177,8 @@ function update() {
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
     }
-	 if (cursors.down.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) {
+	 if (cursors.down.isDown && cursors.right.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
+	 {
 		p1ShootRight();
 		prevShot = this.game.time.totalElapsedSeconds();
 	}
