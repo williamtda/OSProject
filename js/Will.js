@@ -153,24 +153,16 @@ function create() {
 
 
 
-function updateTimer() {
 
-    timeLeft--;
-	timerText.setText('Time: ' + timeLeft);
-
-} 
 
 function update() {
 
     //  Collide the player and the homework with the platforms
     game.physics.arcade.collide(player1, platforms);
 	game.physics.arcade.collide(player2, platforms);
-   /*  if (game.physics.arcade.collide(homework, platforms)){
-		homework.points = 10;
-	} */
+  
 
-    //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
-    //game.physics.arcade.overlap(player, homework, collectHomework, null, this);
+   
 
 	// CHANGE: tests
 	//game.physics.arcade.overlap(player, aTest, collectTest, null, this);
@@ -317,7 +309,7 @@ function p1ShootLeft()
 	//play shoot animation]
 	bullet = game.add.sprite(player1.x, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
-	bullet.velocity.x = -400;
+	bullet.body.velocity.x = -400;
 	game.physics.arcade.collide(bullet, player2);
 }
 
@@ -326,7 +318,7 @@ function p1ShootRight()
 	//play shoot animation]
 	bullet = game.add.sprite(player1.x+30, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
-	bullet.velocity.x = 400;
+	bullet.body.velocity.x = 400;
 	game.physics.arcade.collide(bullet, player2);
 }
 
@@ -335,7 +327,7 @@ function p2ShootLeft()
 	//play shoot animation]
 	bullet = game.add.sprite(player2.x, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
-	bullet.velocity.x = -400;
+	bullet.body.velocity.x = -400;
 	game.physics.arcade.collide(bullet, player1);
 }
 
@@ -344,7 +336,7 @@ function p2ShootRight()
 	//play shoot animation]
 	bullet = game.add.sprite(player2.x + 30, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
-	bullet.velocity.x = 400;
+	bullet.body.velocity.x = 400;
 	game.physics.arcade.collide(bullet, player1);
 }
 
