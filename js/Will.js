@@ -8,7 +8,7 @@ function preload() {
 	game.load.image('bank','assets/bank.png');
 	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 5);
 	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120, 5);
-	 game.load.spritesheet('business', 'assets/leftright.png', 30, 65);
+	 game.load.spritesheet('business', 'assets/leftright.png', 30, 65, 7);
 	 game.load.spritesheet('businessmoney', 'assets/moneyman.png', 30, 65, 7);
 	 game.load.image('ground', 'assets/platform.png');
 	// game.load.image('menu', 'assets/blackbox.png', 360, 200);
@@ -157,15 +157,12 @@ function create() {
 
 function update() {
 
-    //  Collide the player and the homework with the platforms
+    //  Collide the player with the platforms and atms
     game.physics.arcade.collide(player1, platforms);
 	game.physics.arcade.collide(player2, platforms);
-  
-
-   
-
-	// CHANGE: tests
-	//game.physics.arcade.overlap(player, aTest, collectTest, null, this);
+	game.physics.arcade.collide(player1, atms);
+	game.physics.arcade.collide(player2, atms);
+	
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
 	
