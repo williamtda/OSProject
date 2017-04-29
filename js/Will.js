@@ -12,16 +12,16 @@ function preload() {
 	 game.load.spritesheet('businessmoney', 'assets/moneyman.png', 30, 65, 7);
 	 game.load.image('ground', 'assets/platform.png');
 	// game.load.image('menu', 'assets/blackbox.png', 360, 200);
-	 // game.load.spritesheet('left', 'assets/thiefmoney.png', 50, 120, 5);
-	 // game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 5);
-	 // game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 5);
-	 // game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 5);
-
+	  game.load.spritesheet('dieRight', 'assets/die_right.png', 32, 64);
+	  game.load.spritesheet('dieLeft', 'assets/die_left.png', 32, 64);
+	  game.load.spritesheet('shootLeft', 'assets/shoot_left.png', 32, 64);
+	  game.load.spritesheet('shootRight', 'assets/shoot_right.png', 32, 64);
+	game.load.image('bullet', 'assets/bullet.png');
 
 }
 
 
-
+var bullet;
 var player1;
 var player2;
 var platforms;
@@ -76,8 +76,8 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = atms.create(game.world.width - 180, 250, 'atm');
-	var bank = atms.create(0, 250, 'atm');
+	var atm = atms.create(game.world.width - 180, 200, 'atm');
+	var bank = atms.create(0, 200, 'atm');
 	var realBank = atms.create(350, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
@@ -92,7 +92,7 @@ function create() {
 
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'business');
-	player2 = game.add.sprite(100, game.world.height - 150, 'businessmoney');
+	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
 	//player1.frame = 1;
 	//player2.frame = 1;
 
@@ -105,18 +105,27 @@ function create() {
     player1.body.gravity.y = 400;
     player1.body.collideWorldBounds = true;
 
-     //  Our two animations, walking left and right.
+     // Our animations
 	player1.animations.add('left', [4, 5, 6, 7], 7, true);
 	player1.animations.add('right', [0, 1, 2, 3], 7, true); 
+	player1.animations.add('shootLeft', [0, 1, 2], 2, true);
+	player1.animations.add('shootRight', [0, 1, 2, 2], 7, true); 
+	player1.animations.add('dieLeft', [0], 0, true);
+	player1.animations.add('dieRight', [0], 0, true); 
+	
 	
 	 // Player2 physics properties. Give the little guy a slight bounce.
     player2.body.bounce.y = 0.2;
     player2.body.gravity.y = 400;
     player2.body.collideWorldBounds = true;
 
-    //  Our two animations, walking left and right.
+    //  Our animations
 	player2.animations.add('left', [4, 5, 6, 7], 7, true);
 	player2.animations.add('right', [0, 1, 2, 3], 7, true); 
+	player2.animations.add('shootLeft', [0, 1, 2], 2, true);
+	player2.animations.add('shootRight', [0, 1, 2, 2], 7, true); 
+	player2.animations.add('dieLeft', [0], 0, true);
+	player2.animations.add('dieRight', [0], 0, true); 
  
 
 
@@ -136,6 +145,8 @@ function create() {
 	Akey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	Skey = game.input.keyboard.addKey(Phaser.Keyboard.S);
 	Dkey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+		game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
+		game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
 	
 }
 
@@ -237,13 +248,99 @@ function update() {
 
 
 
-/* function updatePlayer() {
-	//  Reset the players velocity (movement)
-    player1.body.velocity.x = 0;
+function killPlayer1()
+{
+	//play kill animation
+	if (player2.x < player1.x)
+	{
+		player1.animations.play('dieRight');
+	}
+	if (player2.x > player1.x)
+	{
+		player1.animations.play('dieLeft');
+	}
 
-   
-} */
+	
+	try {
+		player1.kill();
+	}
+	catch (err)
+	{
+		
+	}
+	//respawn player
+	player1 = game.add.sprite(32, game.world.height - 150, 'business');
+	 game.physics.arcade.enable(player1);
+	 player1.body.bounce.y = 0.2;
+    player1.body.gravity.y = 400;
+    player1.body.collideWorldBounds = true;
+}
 
+	
+	   
+	
+	  
+	  
+function killPlayer2()
+{
+	//play kill animation
+	if (player1.x < player2.x)
+	{
+		player2.animations.play('dieRight');
+	}
+	if (player1.x > player2.x)
+	{
+		player2.animations.play('dieLeft');
+	}
+	try {
+		player2.kill();
+	}
+	catch (err)
+	{
+		
+	}
+	//respawn player
+	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
+	game.physics.arcade.enable(player2);
+	player2.body.bounce.y = 0.2;
+    player2.body.gravity.y = 400;
+    player2.body.collideWorldBounds = true;
+}
+function p1ShootLeft()
+{
+	//play shoot animation]
+	bullet = game.add.sprite(player1.x, player1.y + 30, 'bullet');
+	game.physics.arcade.enable(bullet);
+	bullet.velocity.x = -400;
+	game.physics.arcade.collide(bullet, player2);
+}
+
+function p1ShootRight()
+{
+	//play shoot animation]
+	bullet = game.add.sprite(player1.x+30, player1.y + 30, 'bullet');
+	game.physics.arcade.enable(bullet);
+	bullet.velocity.x = 400;
+	game.physics.arcade.collide(bullet, player2);
+}
+
+function p2ShootLeft()
+{
+	//play shoot animation]
+	bullet = game.add.sprite(player2.x, player1.y + 30, 'bullet');
+	game.physics.arcade.enable(bullet);
+	bullet.velocity.x = -400;
+	game.physics.arcade.collide(bullet, player1);
+}
+
+function p2ShootRight()
+{
+	//play shoot animation]
+	bullet = game.add.sprite(player2.x + 30, player1.y + 30, 'bullet');
+	game.physics.arcade.enable(bullet);
+	bullet.velocity.x = 400;
+	game.physics.arcade.collide(bullet, player1);
+}
 
 
 
