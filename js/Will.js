@@ -109,7 +109,7 @@ function create() {
 	player1.animations.add('left', [4, 5, 6, 7], 7, true);
 	player1.animations.add('right', [0, 1, 2, 3], 7, true); 
 	player1.animations.add('shootLeft', [0, 1, 2], 2, true);
-	player1.animations.add('shootRight', [0, 1, 2, 2], 7, true); 
+	player1.animations.add('shootRight', [0, 1, 2], 2, true); 
 	player1.animations.add('dieLeft', [0], 0, true);
 	player1.animations.add('dieRight', [0], 0, true); 
 	
@@ -123,7 +123,7 @@ function create() {
 	player2.animations.add('left', [4, 5, 6, 7], 7, true);
 	player2.animations.add('right', [0, 1, 2, 3], 7, true); 
 	player2.animations.add('shootLeft', [0, 1, 2], 2, true);
-	player2.animations.add('shootRight', [0, 1, 2, 2], 7, true); 
+	player2.animations.add('shootRight', [0, 1, 2], 2, true); 
 	player2.animations.add('dieLeft', [0], 0, true);
 	player2.animations.add('dieRight', [0], 0, true); 
  
@@ -192,6 +192,12 @@ function update() {
 
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
+    }
+	 if (cursors.down.isDown && cursors.right.isDown)
+    {
+		player1.animations.play('shootRight');
+        //  shoot to the right
+        p1ShootRight();
     }
     else if (cursors.right.isDown)
     {
