@@ -76,8 +76,8 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = atms.create(game.world.width - 180, 200, 'atm');
-	var bank = atms.create(0, 200, 'atm');
+	var atm = atms.create(game.world.width - 180, 100, 'atm');
+	var bank = atms.create(0, 100, 'atm');
 	var realBank = atms.create(350, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
@@ -246,7 +246,7 @@ function update() {
 
 
 
-function killPlayer1()
+function killPlayer1(bullet)
 {
 	//play kill animation
 	if (player2.x < player1.x)
@@ -260,6 +260,7 @@ function killPlayer1()
 
 	
 	try {
+		bullet.kill();
 		player1.kill();
 	}
 	catch (err)
@@ -279,7 +280,7 @@ function killPlayer1()
 	
 	  
 	  
-function killPlayer2()
+function killPlayer2(bullet)
 {
 	//play kill animation
 	if (player1.x < player2.x)
@@ -291,6 +292,7 @@ function killPlayer2()
 		player2.animations.play('dieLeft');
 	}
 	try {
+		bullet.kill();
 		player2.kill();
 	}
 	catch (err)
