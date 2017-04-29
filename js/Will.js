@@ -9,7 +9,7 @@ function preload() {
 	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 5);
 	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120, 5);
 	 game.load.spritesheet('business', 'assets/leftright.png', 30, 65);
-	 game.load.spritesheet('businessmoney', 'assets/businessmoney.png', 30, 69, 7);
+	 game.load.spritesheet('businessmoney', 'assets/moneyman.png', 30, 65, 7);
 	 game.load.image('ground', 'assets/platform.png');
 	// game.load.image('menu', 'assets/blackbox.png', 360, 200);
 	 // game.load.spritesheet('left', 'assets/thiefmoney.png', 50, 120, 5);
