@@ -179,12 +179,9 @@ function update() {
     }
 	 if (cursors.down.isDown && cursors.right.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
 	 {
+		 player1.animations.play('shootRight');
 		p1ShootRight();
 		prevShot = this.game.time.totalElapsedSeconds();
-	}
-		player1.animations.play('shootRight');
-        //  shoot to the right
-        p1ShootRight();
     }
     else if (cursors.right.isDown)
     {
