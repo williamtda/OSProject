@@ -33,7 +33,7 @@ var Skey;
 var Dkey;
 var balance = 0;
 var balanceText;
-
+var prevShot = 0;
 
 
 
@@ -76,8 +76,8 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = atms.create(game.world.width - 180, 100, 'atm');
-	var bank = atms.create(0, 100, 'atm');
+	var atm = atms.create(game.world.width - 180, 140, 'atm');
+	var bank = atms.create(0, 140, 'atm');
 	var realBank = atms.create(350, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
@@ -168,15 +168,7 @@ function update() {
 	//game.physics.arcade.overlap(player, aTest, collectTest, null, this);
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
-	/* if (superKey.isDown){
-		superMode = true;
-	}
 	
-	if (superMode == true){
-		updateSuperPlayer();
-	} else {
-		updatePlayer();
-	} */
 	 if (cursors.left.isDown)
     {
         //  Move to the left
@@ -185,8 +177,10 @@ function update() {
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
     }
-	 if (cursors.down.isDown && cursors.right.isDown)
-    {
+	 if (cursors.down.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) {
+		p1ShootRight();
+		prevShot = this.game.time.totalElapsedSeconds();
+	}
 		player1.animations.play('shootRight');
         //  shoot to the right
         p1ShootRight();
@@ -259,14 +253,7 @@ function killPlayer1(bullet)
 	}
 
 	
-	try {
-		bullet.kill();
-		player1.kill();
-	}
-	catch (err)
-	{
-		
-	}
+	
 	//respawn player
 	player1 = game.add.sprite(32, game.world.height - 150, 'business');
 	 game.physics.arcade.enable(player1);
