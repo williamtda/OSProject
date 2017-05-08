@@ -288,13 +288,13 @@ function update() {
 			
 		}
 		
-		game.physics.arcade.collide(player1, atms, deposit, null, this);
-		game.physics.arcade.collide(player1, atms, deposit, null, this);
+		game.physics.arcade.overlap(player1, atms, deposit, null, this);
+		game.physics.arcade.overlap(player2, atms, deposit, null, this);
 }
 
 function deposit()
 {
-	timeNow = this.game.time.totalElapsedSeconds();
+	//timeNow = this.game.time.totalElapsedSeconds();
 	newBalance = balance + 100;
 	//while ((this.game.time.totalElapsedSeconds() - timeNow) < 2)
 	//{
