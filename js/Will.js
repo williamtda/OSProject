@@ -166,8 +166,8 @@ function update() {
     //  Collide the player with the platforms and atms
     game.physics.arcade.collide(player1, platforms);
 	game.physics.arcade.collide(player2, platforms);
-	game.physics.arcade.collide(player1, atms);
-	game.physics.arcade.collide(player2, atms);
+	//game.physics.arcade.collide(player1, atms);
+	//game.physics.arcade.collide(player2, atms);
 	game.physics.arcade.collide(player1, bullet);
 	game.physics.arcade.collide(player1, bullet);
 	
@@ -193,7 +193,7 @@ function update() {
 		//back2.tilePosition.x+= 5;
 	
     }
-	if (Mkey.isDown)
+	if (Mkey.isDown && player1.x <= 157.5 && player1.y >= 287.5)
     {
         deposit();
     }
@@ -255,7 +255,7 @@ function update() {
     {
         player1.body.velocity.y = -400;
     }
-	if (Rkey.isDown)
+	if (Rkey.isDown && player2.x >= 642.5 && player2.y >= 287.5)
     {
         withdraw();
     }
