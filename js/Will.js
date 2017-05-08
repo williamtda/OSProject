@@ -80,7 +80,7 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = atms.create(game.world.width - 180, 287.5, 'atm');//right
+	var atm = atms.create(game.world.width - 157.5, 287.5, 'atm');//right
 	var atm2 = atms.create(0, 287.5, 'atm');//left
 	var realBank = atms.create(320, 0, 'bank');
 
