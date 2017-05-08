@@ -17,10 +17,12 @@ function preload() {
 	  game.load.spritesheet('shootLeft', 'assets/shoot_left.png', 32, 64);
 	  game.load.spritesheet('shootRight', 'assets/shoot_right.png', 32, 64);
 	game.load.image('bullet', 'assets/bullet.png');
+	game.load.spritesheet('walkLeft', 'assets/walk_left.png', 32, 64);
+	
 
 }
 
-
+var timeNow;
 var bullet;
 var player1;
 var player2;
@@ -32,6 +34,7 @@ var Wkey;
 var Skey;
 var Dkey;
 var balance = 0;
+var newBalance = 0;
 var balanceText;
 var prevShot = 0;
 
@@ -76,18 +79,18 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = atms.create(game.world.width - 180, 140, 'atm');
-	var bank = atms.create(0, 140, 'atm');
+	var atm = atms.create(game.world.width - 180, 140, 'atm');//right
+	var atm2 = atms.create(0, 140, 'atm');//left
 	var realBank = atms.create(350, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     atm.scale.setTo(2, 2);
-	bank.scale.setTo(2, 2);
+	atm2.scale.setTo(2, 2);
 	realBank.scale.setTo(2, 2);
 
     //  This stops it from falling away when you jump on it
     atm.body.immovable = true;
-	bank.body.immovable = true;
+	atm2.body.immovable = true;
 	realBank.body.immovable = true;
 
     // The player and its settings
@@ -110,8 +113,8 @@ function create() {
 	player1.animations.add('right', [0, 1, 2, 3], 7, true); 
 	player1.animations.add('shootLeft', [0, 1, 2], 2, true);
 	player1.animations.add('shootRight', [0, 1, 2], 2, true); 
-	player1.animations.add('dieLeft', [0], 0, true);
-	player1.animations.add('dieRight', [0], 0, true); 
+	player1.animations.add('dieLeft', [0, 1, 2], 2, true);
+	player1.animations.add('dieRight', [0, 1, 2], 2, true); 
 	
 	
 	 // Player2 physics properties. Give the little guy a slight bounce.
@@ -130,7 +133,7 @@ function create() {
 
 
     //  The score
-    balanceText = game.add.text(16, 16, 'balance: 0', { fontSize: '32px', fill: '#000' });
+    balanceText = game.add.text(16, 16, 'Balance: $0', { fontSize: '32px', fill: '#000' });
 	
 	//The Time left
 	//timerText = game.add.text(670, 13, 'Time: 32', { fontSize: '32px', fill: '#000' });
@@ -285,9 +288,22 @@ function update() {
 		{
 			
 		}
+		
+		game.physics.arcade.overlap(player1, atm2, deposit, null, this);
 }
 
-
+function deposit()
+{
+	timeNow = this.game.time.totalElapsedSeconds();
+	newBalance = balance + 100;
+	while ((this.game.time.totalElapsedSeconds() - timeNow) < 2)
+	{
+		//wait
+	}
+	balance = newBalance;
+	balanceText.setText('Balance: $' + balance);
+	
+}
 
 function killPlayer1(player1, bullet)
 {
