@@ -18,7 +18,7 @@ function preload() {
 	  game.load.spritesheet('shootRight', 'assets/shoot_right.png', 32, 64);
 	game.load.image('bullet', 'assets/bullet.png');
 	game.load.spritesheet('walkLeft', 'assets/walk_left.png', 32, 64);
-	
+	game.load.image('menu', 'assets/blackbox.png', 300, 180);
 
 }
 var timeNow;
