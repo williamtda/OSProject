@@ -38,7 +38,8 @@ var balanceText;
 var prevShot = 0;
 var Rkey;
 var Mkey;
-
+var p1Count = 0;
+var p2Count = 0;
 
 //Timer
 var timer;
@@ -170,7 +171,14 @@ function update() {
 	game.physics.arcade.collide(player1, bullet);
 	game.physics.arcade.collide(player1, bullet);
 	
-	
+	if (p1Count == 20)
+	{
+		endGame();
+	}
+	if (p2Count == 20)
+	{
+		endGame();
+	}
 	//game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
 	
       player1.body.velocity.x = 0;
@@ -249,7 +257,7 @@ function update() {
     }
 	if (Rkey.isDown)
     {
-        deposit();
+        withdraw();
     }
 	
      if (Akey.isDown)
@@ -299,22 +307,31 @@ function update() {
 			
 		}
 		
-		game.physics.arcade.overlap(player1, atms, deposit, null, this);
-		game.physics.arcade.overlap(player2, atms, deposit, null, this);
+		//game.physics.arcade.overlap(player1, atms, deposit, null, this);
+		//game.physics.arcade.overlap(player2, atms, deposit, null, this);
 }
 
 function deposit(player1, atms)
 {
 	if (prevShot+.5 < this.game.time.totalElapsedSeconds())
 	{
-	//timeNow = this.game.time.totalElapsedSeconds();
 	newBalance = balance + 100;
-	//while ((this.game.time.totalElapsedSeconds() - timeNow) < 2)
-	{
-		//wait
-	}
 	balance = newBalance;
 	balanceText.setText('Balance: $' + balance);
+	p1Count++;
+	prevShot = this.game.time.totalElapsedSeconds();
+	}
+		
+}
+
+function withdraw(player2)
+{
+	if (prevShot+.5 < this.game.time.totalElapsedSeconds())
+	{
+	newBalance = balance - 100;
+	balance = newBalance;
+	balanceText.setText('Balance: $' + balance);
+	p2Count++;
 	prevShot = this.game.time.totalElapsedSeconds();
 	}
 	
@@ -432,6 +449,42 @@ function p2ShootRight()
     game.debug.text("Next tick: " + game.time.events.next.toFixed(0), 32, 64);
 
 } */
+
+function endGame() {
+	
+	game.paused = true;
+	var w = game.world.width;
+	var h = game.world.height;
+
+	// Then add the menu
+	var menu = game.add.sprite(w/2, h/2, 'menu');
+	menu.anchor.setTo(0.5, 0.5);
+	
+	var endMessage = "GAME OVER\n";
+	if (p1Count > p2Count)
+	{
+		endMessage = endMessage + "Player 1 Wins!";
+	}
+	else
+	{
+		endMessage = endMessage + "Player 2 Wins!";
+	}
+	
+	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
+	endText.anchor.setTo(0.5,0.5);
+
+	// And a label to illustrate which menu item was chosen. (This is not necessary)
+	var choiceLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+30, 'Click here to restart', {fill: '#000000' });
+	choiceLabel.anchor.setTo(0.5, 0.5);
+
+	
+	// Add a input listener that can help us return from being paused
+    game.input.onDown.add(restart, self);
+	function restart(event){
+		location.reload();
+	}
+	
+}
 
 
 
