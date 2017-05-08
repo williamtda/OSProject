@@ -296,10 +296,10 @@ function deposit()
 {
 	timeNow = this.game.time.totalElapsedSeconds();
 	newBalance = balance + 100;
-	while ((this.game.time.totalElapsedSeconds() - timeNow) < 2)
-	{
+	//while ((this.game.time.totalElapsedSeconds() - timeNow) < 2)
+	//{
 		//wait
-	}
+	//}
 	balance = newBalance;
 	balanceText.setText('Balance: $' + balance);
 	
