@@ -199,13 +199,7 @@ function update() {
     }
 	 }
 	 
-	 try {
-			game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
-		}
-		catch (err)
-		{
-			
-		}
+	
     else if (cursors.right.isDown)
     {
         //  Move to the right
@@ -238,13 +232,7 @@ function update() {
 		prevShot = this.game.time.totalElapsedSeconds();
     }
 	 }
-	 try {
-			game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
-		}
-		catch (err)
-		{
-			
-		}
+	 
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player1.body.touching.down)
     {
@@ -283,6 +271,20 @@ function update() {
     {
         player2.body.velocity.y = -400;
     }
+	try {
+			game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
+		}
+		catch (err)
+		{
+			
+		}
+		 try {
+			game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
+		}
+		catch (err)
+		{
+			
+		}
 }
 
 
