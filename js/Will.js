@@ -124,8 +124,8 @@ function create() {
 	player2.animations.add('right', [0, 1, 2, 3], 7, true); 
 	player2.animations.add('shootLeft', [0, 1, 2], 2, true);
 	player2.animations.add('shootRight', [0, 1, 2], 2, true); 
-	player2.animations.add('dieLeft', [0], 0, true);
-	player2.animations.add('dieRight', [0], 0, true); 
+	player2.animations.add('dieLeft', [0, 1, 2], 2, true);
+	player2.animations.add('dieRight', [0, 1, 2], 2, true); 
  
 
 
@@ -162,6 +162,9 @@ function update() {
 	game.physics.arcade.collide(player2, platforms);
 	game.physics.arcade.collide(player1, atms);
 	game.physics.arcade.collide(player2, atms);
+	
+	game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
+	game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
 	
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
@@ -263,7 +266,7 @@ function update() {
 
 
 
-function killPlayer1(bullet)
+function killPlayer1(player1, bullet)
 {
 	//play kill animation
 	if (player2.x < player1.x)
@@ -290,7 +293,7 @@ function killPlayer1(bullet)
 	
 	  
 	  
-function killPlayer2(bullet)
+function killPlayer2(player2, bullet)
 {
 	//play kill animation
 	if (player1.x < player2.x)
@@ -351,6 +354,8 @@ function p2ShootRight()
 	bullet.body.velocity.x = 400;
 	game.physics.arcade.collide(bullet, player1);
 }
+
+
 
 
 
