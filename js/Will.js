@@ -278,6 +278,14 @@ function killPlayer1(player1, bullet)
 		player1.animations.play('dieLeft');
 	}
 
+	try{
+		bullet.kill();
+		player2.kill();
+	}
+	catch (err)
+	{
+		
+	}
 	
 	
 	//respawn player
@@ -321,7 +329,7 @@ function killPlayer2(player2, bullet)
 }
 function p1ShootLeft()
 {
-	//play shoot animation]
+	player1.animations.play('shootLeft');
 	bullet = game.add.sprite(player1.x, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
 	bullet.body.velocity.x = -400;
@@ -330,7 +338,7 @@ function p1ShootLeft()
 
 function p1ShootRight()
 {
-	//play shoot animation]
+	player1.animations.play('shootRight');
 	bullet = game.add.sprite(player1.x+30, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
 	bullet.body.velocity.x = 400;
@@ -339,7 +347,7 @@ function p1ShootRight()
 
 function p2ShootLeft()
 {
-	//play shoot animation]
+	player2.animations.play('shootLeft');
 	bullet = game.add.sprite(player2.x, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
 	bullet.body.velocity.x = -400;
@@ -348,7 +356,7 @@ function p2ShootLeft()
 
 function p2ShootRight()
 {
-	//play shoot animation]
+	player1.animations.play('shootRight');
 	bullet = game.add.sprite(player2.x + 30, player1.y + 30, 'bullet');
 	game.physics.arcade.enable(bullet);
 	bullet.body.velocity.x = 400;
