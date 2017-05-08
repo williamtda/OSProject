@@ -292,7 +292,7 @@ function update() {
 		game.physics.arcade.overlap(player2, atms, deposit, null, this);
 }
 
-function deposit(player1)
+function deposit(player1, atms)
 {
 	timeNow = this.game.time.totalElapsedSeconds();
 	newBalance = balance + 100;
