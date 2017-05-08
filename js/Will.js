@@ -162,8 +162,10 @@ function update() {
 	game.physics.arcade.collide(player2, platforms);
 	game.physics.arcade.collide(player1, atms);
 	game.physics.arcade.collide(player2, atms);
+	game.physics.arcade.collide(player1, bullet);
+	game.physics.arcade.collide(player1, bullet);
 	
-	game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
+	
 	game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
 	
       player1.body.velocity.x = 0;
@@ -176,7 +178,7 @@ function update() {
 
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
-		player1.frame = 4;
+	
     }
 	 if (cursors.down.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
 	 {
@@ -185,7 +187,10 @@ function update() {
 		player1.animations.play('shootRight');
 		p1ShootRight();
 		prevShot = this.game.time.totalElapsedSeconds();
+		
+		
     }
+	
 	if (player1.frame == 4)
 	 {
 		player1.animations.play('shootLeft');
@@ -193,6 +198,14 @@ function update() {
 		prevShot = this.game.time.totalElapsedSeconds();
     }
 	 }
+	 
+	 try {
+			game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
+		}
+		catch (err)
+		{
+			
+		}
     else if (cursors.right.isDown)
     {
         //  Move to the right
@@ -200,14 +213,14 @@ function update() {
 
        player1.animations.play('right');
 		//back2.tilePosition.x-=5;
-		player1.frame = 0;
+
     }
     else
     {
         //  Stand still
-        //player1.animations.stop();
+        player1.animations.stop();
 
-        player1.frame = 2;
+        //player1.frame = 2;
     }
     if (Skey.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
 	 {
@@ -217,6 +230,7 @@ function update() {
 		p2ShootRight();
 		prevShot = this.game.time.totalElapsedSeconds();
     }
+	
 	if (player2.frame = 4)
 	 {
 		player2.animations.play('shootLeft');
@@ -224,6 +238,13 @@ function update() {
 		prevShot = this.game.time.totalElapsedSeconds();
     }
 	 }
+	 try {
+			game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
+		}
+		catch (err)
+		{
+			
+		}
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player1.body.touching.down)
     {
@@ -237,7 +258,7 @@ function update() {
 		player2.animations.play('left');
         
 		//back2.tilePosition.x+= 5;
-		player2.frame = 4;
+		//player2.frame = 4;
     }
     else if (Dkey.isDown)
     {
@@ -246,12 +267,12 @@ function update() {
 
        player2.animations.play('right');
 		//back2.tilePosition.x-=5;
-		player2.frame = 0;
+		//player2.frame = 0;
     }
     else
     {
         //  Stand still
-        //player1.animations.stop();
+        player2.animations.stop();
 
         //player2.frame = 2;
     }
