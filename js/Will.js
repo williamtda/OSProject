@@ -147,8 +147,8 @@ function create() {
 	Akey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	Skey = game.input.keyboard.addKey(Phaser.Keyboard.S);
 	Dkey = game.input.keyboard.addKey(Phaser.Keyboard.D);
-		game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
-		game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
+		//game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
+		//game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
 	
 }
 
@@ -168,7 +168,7 @@ function update() {
 	game.physics.arcade.collide(player1, bullet);
 	
 	
-	game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
+	//game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
 	
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
@@ -288,7 +288,8 @@ function update() {
 			
 		}
 		
-		game.physics.arcade.overlap(player1, atms, deposit, null, this);
+		game.physics.arcade.collide(player1, atms, deposit, null, this);
+		game.physics.arcade.collide(player1, atms, deposit, null, this);
 }
 
 function deposit()
