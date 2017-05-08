@@ -80,13 +80,13 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	var atm = atms.create(game.world.width - 180, 250, 'atm');//right
-	var atm2 = atms.create(0, 250, 'atm');//left
+	var atm = atms.create(game.world.width - 180, 287.5, 'atm');//right
+	var atm2 = atms.create(0, 287.5, 'atm');//left
 	var realBank = atms.create(320, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    atm.scale.setTo(2, 2);
-	atm2.scale.setTo(2, 2);
+    atm.scale.setTo(1.75, 1.5);
+	atm2.scale.setTo(1.75, 1.5);
 	realBank.scale.setTo(2, 2);
 
     //  This stops it from falling away when you jump on it
