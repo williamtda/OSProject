@@ -312,7 +312,7 @@ function killPlayer1(player1, bullet)
 	
 	
 	//respawn player
-	player1 = game.add.sprite(32, game.world.height - 150, 'business');
+	player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	 game.physics.arcade.enable(player1);
 	 player1.body.bounce.y = 0.2;
     player1.body.gravity.y = 400;
