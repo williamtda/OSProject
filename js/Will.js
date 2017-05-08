@@ -36,8 +36,6 @@ var balance = 0;
 var newBalance = 0;
 var balanceText;
 var prevShot = 0;
-var atm;
-var atm2;
 
 
 
@@ -80,10 +78,8 @@ function create() {
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;
 	
-	atm = game.add.sprite(game.world.width - 180, 140, 'atm');//right
-	atm2 = game.add.sprite(0, 140, 'atm');//left
-	atm.enableBody = true;
-	atm2.enableBody = true;
+	var atm = atms.create(game.world.width - 180, 140, 'atm');//right
+	var atm2 = atms.create(0, 140, 'atm');//left
 	var realBank = atms.create(350, 0, 'bank');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
@@ -166,8 +162,8 @@ function update() {
     //  Collide the player with the platforms and atms
     game.physics.arcade.collide(player1, platforms);
 	game.physics.arcade.collide(player2, platforms);
-	game.physics.arcade.collide(player1, atm2);
-	game.physics.arcade.collide(player2, atm);
+	game.physics.arcade.collide(player1, atms);
+	game.physics.arcade.collide(player2, atms);
 	game.physics.arcade.collide(player1, bullet);
 	game.physics.arcade.collide(player1, bullet);
 	
@@ -292,18 +288,18 @@ function update() {
 			
 		}
 		
-		game.physics.arcade.overlap(player1, atm2, deposit, null, this);
-		game.physics.arcade.overlap(player2, atm1, deposit, null, this);
+		game.physics.arcade.overlap(player1, atms, deposit, null, this);
+		game.physics.arcade.overlap(player2, atms, deposit, null, this);
 }
 
-function deposit()
+function deposit(player1)
 {
-	//timeNow = this.game.time.totalElapsedSeconds();
+	timeNow = this.game.time.totalElapsedSeconds();
 	newBalance = balance + 100;
 	//while ((this.game.time.totalElapsedSeconds() - timeNow) < 2)
-	//{
+	{
 		//wait
-	//}
+	}
 	balance = newBalance;
 	balanceText.setText('Balance: $' + balance);
 	
