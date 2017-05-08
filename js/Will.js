@@ -36,7 +36,8 @@ var balance = 0;
 var newBalance = 0;
 var balanceText;
 var prevShot = 0;
-
+var Rkey;
+var Mkey;
 
 
 //Timer
@@ -147,6 +148,8 @@ function create() {
 	Akey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	Skey = game.input.keyboard.addKey(Phaser.Keyboard.S);
 	Dkey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+	Mkey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+	Rkey = game.input.keyboard.addKey(Phaser.Keyboard.R);
 		//game.physics.arcade.overlap(player1, bullet, killPlayer1, null, this);
 		//game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
 	
@@ -181,6 +184,10 @@ function update() {
         player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
 	
+    }
+	if (Mkey.isDown)
+    {
+        deposit();
     }
 	 if (cursors.down.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
 	 {
@@ -240,6 +247,10 @@ function update() {
     {
         player1.body.velocity.y = -400;
     }
+	if (Rkey.isDown)
+    {
+        deposit();
+    }
 	
      if (Akey.isDown)
     {
@@ -294,7 +305,9 @@ function update() {
 
 function deposit(player1, atms)
 {
-	timeNow = this.game.time.totalElapsedSeconds();
+	if (prevShot+.5 < this.game.time.totalElapsedSeconds())
+	{
+	//timeNow = this.game.time.totalElapsedSeconds();
 	newBalance = balance + 100;
 	//while ((this.game.time.totalElapsedSeconds() - timeNow) < 2)
 	{
@@ -302,6 +315,8 @@ function deposit(player1, atms)
 	}
 	balance = newBalance;
 	balanceText.setText('Balance: $' + balance);
+	prevShot = this.game.time.totalElapsedSeconds();
+	}
 	
 }
 
