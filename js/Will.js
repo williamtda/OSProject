@@ -21,7 +21,6 @@ function preload() {
 	
 
 }
-
 var timeNow;
 var bullet;
 var player1;
@@ -289,7 +288,7 @@ function update() {
 			
 		}
 		
-		game.physics.arcade.overlap(player1, atm2, deposit, null, this);
+		game.physics.arcade.overlap(player1, atms, deposit, null, this);
 }
 
 function deposit()
