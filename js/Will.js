@@ -342,16 +342,16 @@ function killPlayer1(player1, bullet)
 	//play kill animation
 	if (player2.x < player1.x)
 	{
-		player1.animations.play('dieRight');
+		//player1.animations.play('dieRight');
 	}
 	if (player2.x > player1.x)
 	{
-		player1.animations.play('dieLeft');
+		//player1.animations.play('dieLeft');
 	}
 
 	try{
 		bullet.kill();
-		player2.kill();
+		player1.kill();
 	}
 	catch (err)
 	{
@@ -360,7 +360,7 @@ function killPlayer1(player1, bullet)
 	
 	
 	//respawn player
-	player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
+	player1 = game.add.sprite(32, 0, 'businessmoney');
 	 game.physics.arcade.enable(player1);
 	 player1.body.bounce.y = 0.2;
     player1.body.gravity.y = 400;
@@ -377,11 +377,11 @@ function killPlayer2(player2, bullet)
 	//play kill animation
 	if (player1.x < player2.x)
 	{
-		player2.animations.play('dieRight');
+	//	player2.animations.play('dieRight');
 	}
 	if (player1.x > player2.x)
 	{
-		player2.animations.play('dieLeft');
+	//	player2.animations.play('dieLeft');
 	}
 	try {
 		bullet.kill();
@@ -392,7 +392,7 @@ function killPlayer2(player2, bullet)
 		
 	}
 	//respawn player
-	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
+	player2 = game.add.sprite(650, 0, 'businessmoney');
 	game.physics.arcade.enable(player2);
 	player2.body.bounce.y = 0.2;
     player2.body.gravity.y = 400;
