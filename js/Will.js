@@ -8,7 +8,7 @@ function preload() {
 	game.load.image('bank','assets/bank.png');
 	 game.load.spritesheet('thiefmoney', 'assets/thiefmoney.png', 50, 120, 5);
 	 game.load.spritesheet('thief', 'assets/thief.png', 50, 120, 5);
-	 game.load.spritesheet('business', 'assets/character.png', 35, 74, 17);
+	 game.load.spritesheet('business', 'assets/leftright.png', 30, 65, 7);
 	 game.load.spritesheet('businessmoney', 'assets/moneyman.png', 30, 65, 7);
 	 game.load.image('ground', 'assets/platform.png');
 	// game.load.image('menu', 'assets/blackbox.png', 360, 200);
@@ -40,7 +40,7 @@ var Rkey;
 var Mkey;
 var p1Count = 0;
 var p2Count = 0;
-var player3;
+
 //Timer
 var timer;
 var timeLeft = 32;
@@ -97,26 +97,17 @@ function create() {
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
-	player3 = game.add.sprite(400, game.world.height - 300, 'business');
 	//player1.frame = 1;
 	//player2.frame = 1;
 
     //  We need to enable physics on the players
     game.physics.arcade.enable(player1);
 	game.physics.arcade.enable(player2);
-	game.physics.arcade.enable(player3);
 
     //  Player1 physics properties. Give the little guy a slight bounce.
     player1.body.bounce.y = 0.2;
     player1.body.gravity.y = 400;
     player1.body.collideWorldBounds = true;
-
-	 player3.body.bounce.y = 0.2;
-    player3.body.gravity.y = 400;
-    player3.body.collideWorldBounds = true;
-	
-	player3.animations.add('left', [14, 15, 16, 17], true);
-	player3.animations.add('right', [7, 8, 9, 10], true); 
 
      // Our animations
 	player1.animations.add('left', [4, 5, 6, 7], 7, true);
@@ -175,7 +166,6 @@ function update() {
     //  Collide the player with the platforms and atms
     game.physics.arcade.collide(player1, platforms);
 	game.physics.arcade.collide(player2, platforms);
-game.physics.arcade.collide(player3, platforms);
 	//game.physics.arcade.collide(player1, atms);
 	//game.physics.arcade.collide(player2, atms);
 	game.physics.arcade.collide(player1, bullet);
@@ -193,14 +183,13 @@ game.physics.arcade.collide(player3, platforms);
 	
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
-	 player3.body.velocity.x = 0;
 	
 	 if (cursors.left.isDown)
     {
         //  Move to the left
-        player3.body.velocity.x = -300;
+        player1.body.velocity.x = -300;
 
-        player3.animations.play('left');
+        player1.animations.play('left');
 		//back2.tilePosition.x+= 5;
 	
     }
@@ -231,9 +220,9 @@ game.physics.arcade.collide(player3, platforms);
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player3.body.velocity.x = 300;
+        player1.body.velocity.x = 300;
 
-       player3.animations.play('right');
+       player1.animations.play('right');
 		//back2.tilePosition.x-=5;
 
     }
