@@ -175,6 +175,7 @@ function update() {
     //  Collide the player with the platforms and atms
     game.physics.arcade.collide(player1, platforms);
 	game.physics.arcade.collide(player2, platforms);
+game.physics.arcade.collide(player3, platforms);
 	//game.physics.arcade.collide(player1, atms);
 	//game.physics.arcade.collide(player2, atms);
 	game.physics.arcade.collide(player1, bullet);
@@ -192,13 +193,14 @@ function update() {
 	
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
+	 player3.body.velocity.x = 0;
 	
 	 if (cursors.left.isDown)
     {
         //  Move to the left
-        player1.body.velocity.x = -300;
+        player3.body.velocity.x = -300;
 
-        player1.animations.play('left');
+        player3.animations.play('left');
 		//back2.tilePosition.x+= 5;
 	
     }
@@ -229,9 +231,9 @@ function update() {
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player1.body.velocity.x = 300;
+        player3.body.velocity.x = 300;
 
-       player1.animations.play('right');
+       player3.animations.play('right');
 		//back2.tilePosition.x-=5;
 
     }
