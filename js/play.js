@@ -82,8 +82,8 @@ create : function() {
 
     //  The text items
     balanceText = game.add.text(16, 16, 'Balance: $0', { fontSize: '32px', fill: '#000' });
-	var atmText = game.add.text(game.world.width - 157.5, 280, 'Player 2 ATM', { fontSize: '32px', fill: '#000' });
-    var atmText2 = game.add.text(10, 280, 'Player 1 ATM', { fontSize: '32px', fill: '#000' });
+	var atmText = game.add.text(game.world.width - 157.5, 268, 'Player 2 ATM', { fontSize: '32px', fill: '#000' });
+    var atmText2 = game.add.text(10, 268, 'Player 1 ATM', { fontSize: '32px', fill: '#000' });
 	
 
     //  Our controls.
