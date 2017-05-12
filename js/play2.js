@@ -262,7 +262,7 @@ withdraw : function ()
 	{
 	if (balance >= 100)
 	{
-		moneyMusic.play();
+	moneyMusic.play();
 	console.log('Withdrawing $100');
 	newBalance = balance - 100;
 	console.log(', new balance is ' + newBalance);
