@@ -2,8 +2,7 @@ var playState2 = {
 create : function() {
 	
 	menuMusic = game.add.audio('menuMusic');
-
-		gunMusic = game.add.audio('gunMusic');
+	gunMusic = game.add.audio('gunMusic');
 	moneyMusic = game.add.audio('moneyMusic');
 	
 	back2 = game.add.tileSprite(0, 0, 800, 600, 'background');
@@ -37,7 +36,7 @@ create : function() {
 	var atm2 = atms.create(0, 287.5, 'atm');//left
 	var realBank = atms.create(320, 0, 'bank');
 
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    //  Scale it to fit the width of the game
     atm.scale.setTo(1.75, 1.5);
 	atm2.scale.setTo(1.75, 1.5);
 	realBank.scale.setTo(2, 2);
@@ -50,8 +49,7 @@ create : function() {
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
-	//player1.frame = 1;
-	//player2.frame = 1;
+]
 
     //  We need to enable physics on the players
     game.physics.arcade.enable(player1);
@@ -62,13 +60,10 @@ create : function() {
     player1.body.gravity.y = 400;
     player1.body.collideWorldBounds = true;
 
-     // Our animations
+     // Player1 animations
 	player1.animations.add('left', [4, 5, 6, 7], 7, true);
 	player1.animations.add('right', [0, 1, 2, 3], 7, true); 
-	player1.animations.add('shootLeft', [0, 1, 2], 2, true);
-	player1.animations.add('shootRight', [0, 1, 2], 2, true); 
-	player1.animations.add('dieLeft', [0, 1, 2], 2, true);
-	player1.animations.add('dieRight', [0, 1, 2], 2, true); 
+
 	
 	
 	 // Player2 physics properties. Give the little guy a slight bounce.
@@ -76,24 +71,17 @@ create : function() {
     player2.body.gravity.y = 400;
     player2.body.collideWorldBounds = true;
 
-    //  Our animations
+    //  Player2 animations
 	player2.animations.add('left', [4, 5, 6, 7], 7, true);
 	player2.animations.add('right', [0, 1, 2, 3], 7, true); 
-	player2.animations.add('shootLeft', [0, 1, 2], 2, true);
-	player2.animations.add('shootRight', [0, 1, 2], 2, true); 
-	player2.animations.add('dieLeft', [0, 1, 2], 2, true);
-	player2.animations.add('dieRight', [0, 1, 2], 2, true); 
+
  
 
 
     //  The score
     balanceText = game.add.text(16, 16, 'Balance: $2000', { fontSize: '32px', fill: '#000' });
 	
-	//The Time left
-	//timerText = game.add.text(670, 13, 'Time: 32', { fontSize: '32px', fill: '#000' });
-	//timer = game.time.create(false);
-	//timer.loop(1000, updateTimer, this);
-	//timer.start();
+	
 	
 
     //  Our controls.
@@ -124,10 +112,7 @@ update : function() {
 	{
 		endGame();
 	}
-	
-	
-	//game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
-	
+		
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
 	
@@ -137,7 +122,7 @@ update : function() {
         player1.body.velocity.x = -300;
 
         player1.animations.play('left');
-		//back2.tilePosition.x+= 5;
+	
 	
     }
 	if (Mkey.isDown && player1.x <= 157.5 && player1.y >= 287.5)
@@ -159,7 +144,7 @@ update : function() {
         player1.body.velocity.x = 300;
 
        player1.animations.play('right');
-		//back2.tilePosition.x-=5;
+		
 
     }
     else
@@ -167,7 +152,7 @@ update : function() {
         //  Stand still
         player1.animations.stop();
 
-        //player1.frame = 2;
+  
     }
     if (Skey.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
 	 {
@@ -192,8 +177,7 @@ update : function() {
         player2.body.velocity.x = -300;
 		player2.animations.play('left');
         
-		//back2.tilePosition.x+= 5;
-		//player2.frame = 4;
+		
     }
     else if (Dkey.isDown)
     {
@@ -201,15 +185,14 @@ update : function() {
         player2.body.velocity.x = 300;
 
        player2.animations.play('right');
-		//back2.tilePosition.x-=5;
-		//player2.frame = 0;
+		
     }
     else
     {
         //  Stand still
         player2.animations.stop();
 
-        //player2.frame = 2;
+       
     }
 	
     

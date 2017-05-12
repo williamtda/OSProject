@@ -36,7 +36,7 @@ create : function() {
 	var atm2 = atms.create(0, 287.5, 'atm');//left
 	var realBank = atms.create(320, 0, 'bank');
 
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+
     atm.scale.setTo(1.75, 1.5);
 	atm2.scale.setTo(1.75, 1.5);
 	realBank.scale.setTo(2, 2);
@@ -46,7 +46,7 @@ create : function() {
 	atm2.body.immovable = true;
 	realBank.body.immovable = true;
 
-    // The player and its settings
+    // The players and their settings
     player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
 
@@ -60,7 +60,7 @@ create : function() {
     player1.body.gravity.y = 400;
     player1.body.collideWorldBounds = true;
 
-     // Our animations
+     // Player1 animations
 	player1.animations.add('left', [4, 5, 6, 7], 7, true);
 	player1.animations.add('right', [0, 1, 2, 3], 7, true); 
 
@@ -72,7 +72,7 @@ create : function() {
     player2.body.gravity.y = 400;
     player2.body.collideWorldBounds = true;
 
-    //  Our animations
+    //  Player2 animations
 	player2.animations.add('left', [4, 5, 6, 7], 7, true);
 	player2.animations.add('right', [0, 1, 2, 3], 7, true); 
 	
@@ -103,9 +103,6 @@ update : function() {
  //  Collide the player with the platforms and atms
     game.physics.arcade.collide(player1, platforms);
 	game.physics.arcade.collide(player2, platforms);
-
-	//game.physics.arcade.collide(player1, bullet);
-	//game.physics.arcade.collide(player1, bullet);
 	
 	game.physics.arcade.overlap(bullet, player1, p1Die, null, this);
 	game.physics.arcade.overlap(bullet, player2, p2Die, null, this);
@@ -127,7 +124,7 @@ update : function() {
 	{
 		endGame();
 	}
-	//game.physics.arcade.overlap(player2, bullet, killPlayer2, null, this);
+	
 	
       player1.body.velocity.x = 0;
 	   player2.body.velocity.x = 0;
@@ -138,7 +135,7 @@ update : function() {
         player1.body.velocity.x = -300;
 
         player1.animations.play('left');
-		//back2.tilePosition.x+= 5;
+
 	
     }
 	if (Mkey.isDown && player1.x <= 157.5 && player1.y >= 287.5 && player1.y<=400)
@@ -159,7 +156,7 @@ update : function() {
         player1.body.velocity.x = 300;
 
        player1.animations.play('right');
-		//back2.tilePosition.x-=5;
+	
 
     }
     else
@@ -167,7 +164,7 @@ update : function() {
         //  Stand still
         player1.animations.stop();
 
-        //player1.frame = 2;
+       
     }
     if (Skey.isDown && (prevShot+.5 < this.game.time.totalElapsedSeconds())) 
 	 {
@@ -192,8 +189,7 @@ update : function() {
         player2.body.velocity.x = -300;
 		player2.animations.play('left');
         
-		//back2.tilePosition.x+= 5;
-		//player2.frame = 4;
+	
     }
     else if (Dkey.isDown)
     {
@@ -201,15 +197,14 @@ update : function() {
         player2.body.velocity.x = 300;
 
        player2.animations.play('right');
-		//back2.tilePosition.x-=5;
-		//player2.frame = 0;
+	
     }
     else
     {
         //  Stand still
         player2.animations.stop();
 
-        //player2.frame = 2;
+   
     }
 	
     
