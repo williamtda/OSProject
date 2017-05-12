@@ -49,7 +49,7 @@ create : function() {
     // The player and its settings
     player1 = game.add.sprite(32, game.world.height - 150, 'businessmoney');
 	player2 = game.add.sprite(650, game.world.height - 150, 'businessmoney');
-]
+
 
     //  We need to enable physics on the players
     game.physics.arcade.enable(player1);
