@@ -3,7 +3,7 @@ var loadState = {
 	
 	preload : function() {
 		
-		var loadingLabel = game.add.text(400, 300, 'Loading...',
+		var loadingLabel = game.add.text(320, 300, 'Loading...',
 		{font: '30px Courier', fill: '#ffffff'});
 		
 	game.load.image('background', 'assets/back2.png');

@@ -80,7 +80,8 @@ create : function() {
 
     //  The score
     balanceText = game.add.text(16, 16, 'Balance: $2000', { fontSize: '32px', fill: '#000' });
-	
+	var atmText = game.add.text(game.world.width - 157.5, 260, 'Player 2', { fontSize: '32px', fill: '#000' });
+    var atmText2 = game.add.text(10, 260, 'Player 1', { fontSize: '32px', fill: '#000' });
 	
 	
 
